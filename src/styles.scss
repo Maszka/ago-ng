@@ -1,10 +1,13 @@
 @import 'variables';
 
-html, body, p {
+html, body, p, label {
     color: $main-text-color;
+    font-size: 16px;
+    background-color: #ffffff;
 }
-.bwm-form {
+.ago-form {
     color: $main-text-color;
+    font-size: 16px;
   
     form {
       margin-bottom: 10px;
@@ -30,11 +33,11 @@ html, body, p {
     }
   
     label {
-      font-size: 12px;
+      font-size: 16px;
     }
   
     .form-text {
-      font-size: 13px;
+      font-size: 16px;
     }
   
     .catchphrase {
@@ -48,4 +51,5 @@ html, body, p {
       letter-spacing: 1px;
     }
   }
+
   

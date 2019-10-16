@@ -1,42 +1,70 @@
-const Rental = require('./models/rental');
+const Workshop = require('./models/workshop');
 const User = require('./models/user');
 
 class FakeDb {
 
     constructor() {
-        this.rentals = [{
-            title: "Nice view on ocean",
-            city: "San Francisco",
-            street: "Main street",
-            category: "condo",
-            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-            bedrooms: 4,
-            shared: true,
-            description: "Very nice apartment in center of the city.",
-            dailyRate: 43
-            },
-            {
-            title: "Modern apartment in center",
-            city: "New York",
-            street: "Time Square",
-            category: "apartment",
-            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-            bedrooms: 1,
-            shared: false,
-            description: "Very nice apartment in center of the city.",
-            dailyRate: 11
-            },
-            {
-            title: "Old house in nature",
-            city: "Spisska Nova Ves",
-            street: "Banicka 1",
-            category: "house",
-            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-            bedrooms: 5,
-            shared: true,
-            description: "Very nice apartment in center of the city.",
-            dailyRate: 23
-    }];
+        this.workshops = [{
+
+            title: "Guitar workshops in the city center",
+            city: "Kraków",
+            street: "Floriańska",
+            category: "Music",
+            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/workshop/image/5/image.jpeg",
+            maxNumberOfAtendees: 5,
+            description: "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.",
+            price: 200,
+            duration: "5h",
+        },
+        {
+
+            title: "Create your own ceramics!",
+            city: "Warszawa",
+            street: "Marszałkowska",
+            category: "Applied arts",
+            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/workshop/image/5/image.jpeg",
+            maxNumberOfAtendees: 10,
+            description: "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.",
+            price: 100,
+            duration: "6h",
+        },
+        {
+
+            title: "Art Machine - paintings and more",
+            city: "Kraków",
+            street: "Nowohucka",
+            category: "Paintings",
+            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/workshop/image/5/image.jpeg",
+            maxNumberOfAtendees: 5,
+            description: "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.",
+            price: 50,
+            duration: "5h",
+        },
+        {
+
+            title: "Around the World - Madagaskar",
+            city: "Gdańsk",
+            street: "św. Bronisławy",
+            category: "Travels",
+            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/workshop/image/5/image.jpeg",
+            maxNumberOfAtendees: 5,
+            description: "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.",
+            price: 0,
+            duration: "2h",
+        },
+        {
+
+            title: "Create your own DIY wooden table!",
+            city: "Warszawa",
+            street: "Marszałkowska",
+            category: "Applied arts",
+            image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/workshop/image/5/image.jpeg",
+            maxNumberOfAtendees: 10,
+            description: "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini. Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.",
+            price: 500,
+            duration: "10h",
+        },
+            ];
     
     this.users = [{
         username: "TestUser",
@@ -47,20 +75,20 @@ class FakeDb {
 
     async cleanDb(){
         await User.deleteMany({});
-        await Rental.deleteMany({});
+        await Workshop.deleteMany({});
     }
 
     pushDataToDb(){
 
         const user = new User(this.users[0]);
 
-        this.rentals.forEach((rental) => {
-            const newRental = new Rental(rental);
-            newRental.user = user;
+        this.workshops.forEach((workshop) => {
+            const newWorkshop = new Workshop(workshop);
+            newWorkshop.user = user;
 
-            user.rentals.push(newRental);
+            user.workshops.push(newWorkshop);
 
-            newRental.save();
+            newWorkshop.save();
         })
 
         user.save();

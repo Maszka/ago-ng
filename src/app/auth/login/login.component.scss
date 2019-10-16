@@ -1,0 +1,23 @@
+@import 'variables';
+
+.btn {
+    border-radius: 24px;
+    background: $main-color;
+    border-color:$main-color;
+    color:#ffffff;
+    width: 150px;
+    
+
+
+    &:hover, &:focus, &:active {
+      box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
+    }
+  }
+  .form-control{
+    background: #F9F9F9;
+    border-radius: 6px 6px 0px 0px;
+
+    &:hover{
+        border-bottom-color: $main-color;
+    }
+  }

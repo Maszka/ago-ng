@@ -3,11 +3,15 @@
 .navbar {
     padding: 20px;
     margin-bottom: 40px;
+    border: 0.5px solid $borders-inactive-color;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
   
   
     .ago-search {
       height: 50px;
       width: 300px;
+      background: #F9F9F9;
+      border-radius: 6px;
     }
   
   
@@ -21,20 +25,24 @@
   
   
     .nav-item {
-      font-size: 14px;
+      font-size: 16px;
     }
   
   
     .btn-ago-search {
+      border-radius: 24px;
+      background: $main-color;
       border-color:$main-color;
-      color:$main-color;
+      color:#ffffff;
+      width: 120px;
+      
   
   
       &:hover, &:focus, &:active {
-        background-color: transparent;
-        border-color:$main-color !important;
-        color: $main-color !important;
-        box-shadow: none;
+        box-shadow: 4px 4px 4px rgba(0,0,0,0.18);
       }
     }
   }
+  .bg-light {
+    background-color: #ffffff!important;
+}

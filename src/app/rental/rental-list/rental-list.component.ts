@@ -22,7 +22,8 @@ export class RentalListComponent implements OnInit {
         this.rentals = rentals;
       },
       (err) => {
-
+        console.log("rental-list component error");
+        console.log(err);
       },
       () => {
 

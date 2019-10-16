@@ -5,15 +5,15 @@ import {Routes, RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
-import { RentalComponent } from './rental/rental.component';
+import { WorkshopComponent } from './workshop/workshop.component';
 
-import {RentalModule} from './rental/rental.module';
+import {WorkshopModule} from './workshop/workshop.module';
 import {AuthModule} from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/rentals', pathMatch: 'full' }
+  {path: '', redirectTo: '/workshops', pathMatch: 'full' }
 ]
 
 @NgModule({
@@ -25,7 +25,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    RentalModule,
+    WorkshopModule,
     AuthModule,
     HttpClientModule
   ],

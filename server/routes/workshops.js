@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Rental = require('../models/rental');
+const Workshop = require('../models/workshop');
 
 const UserCtrl = require('../controllers/user');
 
@@ -10,20 +10,20 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res){
 
 
 router.get('', function(req, res){
-   Rental.find({}, function(err, foundRentals){
-        res.json(foundRentals);
+   Workshop.find({}, function(err, foundWorkshops){
+        res.json(foundWorkshops);
    });
 });
 
 router.get('/:id', function(req, res){
-    const rentalId = req.params.id;
+    const workshopId = req.params.id;
 
-    Rental.findById(rentalId, function(err, foundRentals){
+    Workshop.findById(workshopId, function(err, foundWorkshops){
         if(err){
-            res.status(422).send({errors: [{title: 'Rental Error', detail: 'Rental not found'}]});
+            res.status(422).send({errors: [{title: 'Workshop Error', detail: 'Workshop not found'}]});
         }
 
-        res.json(foundRentals);
+        res.json(foundWorkshops);
     });
 });
 

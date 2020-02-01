@@ -1,0 +1,93 @@
+<section id="newRental">
+  <div class="ago-form">
+    <div class="row">
+      <div class="col-md-5">
+        <h1 class="page-title">Stwórz obiekt, który chesz wypożyczyć</h1>
+        <form #rentalForm='ngForm'>
+          <div class="form-group">
+            <label for="title">Nazwa</label>
+            <input type="text"
+                   class="form-control"
+                   id="title"
+                   name= "title"
+                   [(ngModel)]="newRental.title">
+          </div>
+
+          <div class="form-group">
+            <label for="city">Miasto</label>
+            <input type="text"
+                   class="form-control"
+                   id="city"
+                   name= "city"
+                   [(ngModel)]="newRental.city">
+          </div>
+
+          <div class="form-group">
+            <label for="street">Ulica</label>
+            <input type="text"
+                   class="form-control"
+                   id="street"
+                   name= "street"
+                   [(ngModel)]="newRental.street">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Kategoria</label>
+
+            <select class="form-control"
+                    id="category"
+                    name= "category"
+                   [(ngModel)]="newRental.category">
+              <option *ngFor="let category of rentalCategories"> {{category}} </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Zdjęcie</label>
+            <input type="file"
+                   name="image"
+                   class="form-control"
+                   id="image"
+                   placeholder="Upload file..."
+                   (change)="handleImageChange()">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Opis</label>
+            <textarea rows="5"
+                      type="text"
+                      class="form-control"
+                      id="description"
+                      name= "description"
+                      [(ngModel)]="newRental.description">
+            </textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Cena za dzień</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">zł</div>
+              </div>
+              <input type="number"
+                     name="price"
+                     class="form-control"
+                     id="price"
+                     name= "price"
+                    [(ngModel)]="newRental.price">
+            </div>
+          </div>
+
+          <button (click)="createRental()" type="button" class="btn btn-ago">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-6 ml-auto">
+        <div class="image-container">
+          <h2 class="catchphrase">Hundreds of awesome rentals in reach of few clicks.</h2>
+          <img src="assets/images/create-rental.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

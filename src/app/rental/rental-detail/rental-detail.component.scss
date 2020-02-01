@@ -1,6 +1,6 @@
 @import 'variables';
 
-#workshopDetails {
+#rentalDetails {
   .upper-section {
     img {
       width: 100%;
@@ -11,7 +11,7 @@
 
   .details-section {
     color: $main-text-color;
-    .workshop {
+    .rental {
       &-type {
         font-size: 14px;
         font-weight: 300;

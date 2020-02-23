@@ -5,8 +5,7 @@
         <img src="{{rental.image}}" alt="">
       </div>
       <div class="col-md-6">
-        <!-- Will be replaced with map !!!! -->
-        <img src="{{rental.image}}" alt="">
+        <ago-map [location]="rental.city + ', ' + rental.street"></ago-map>
       </div>
     </div>
   </div>
@@ -28,7 +27,9 @@
           <hr>
         </div>
       </div>
-      <div class="col-md-4"> BOOKING</div>
+      <div class="col-md-4"> 
+        <ago-rental-detail-booking [price]="rental.price"></ago-rental-detail-booking>
+      </div>
     </div>
   </div>
 </section>

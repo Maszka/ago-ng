@@ -1,0 +1,13 @@
+<agm-map 
+(mapReady)="mapReadyHandler()" 
+[latitude]="lat" 
+[longitude]="lng"
+[zoom]="13">
+  <agm-circle 
+  [latitude]="lat" 
+  [longitude]="lng"
+  [radius]="800"
+  [fillColor]="'#5600FF'"
+  [fillOpacity]="0.4">
+</agm-circle>
+</agm-map>

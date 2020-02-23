@@ -16,7 +16,7 @@ export class RentalCreateComponent implements OnInit {
   constructor(private rentalService: RentalService) { }
 
   handleImageChange() {
-    this.newRental.image = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Abies_concolor_Warsaw.JPG/800px-Abies_concolor_Warsaw.JPG?fbclid=IwAR1N9kQD-4yVx3rPwEdt8gy27svUZzhro0vAj33jCpkqMDq8U4-kJr2ZgZ0";
+    this.newRental.image = "https://upload.wikimedia.org/wikipedia/commons/0/01/Gibson_Les_Paul_54_Custom.jpg";
   }
 
   ngOnInit() {

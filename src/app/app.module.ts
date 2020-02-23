@@ -12,6 +12,7 @@ import {AuthModule} from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 
 
+
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full' }
 ]
@@ -19,7 +20,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent
 
   ],
   imports: [

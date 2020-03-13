@@ -36,7 +36,7 @@ exports.createBooking = function(req, res) {
                return res.json({startAt: booking.startAt, endAt: booking.endAt});
            }else {
             
-            return res.status(422).send({errors: [{title: 'Invalid user', detail: 'Dates taken'}]});
+            return res.status(422).send({errors: [{title: 'Invalid user', detail: 'Wybrane daty są niedostępne'}]});
            }
         })
 }

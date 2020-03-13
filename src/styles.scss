@@ -3,7 +3,7 @@
 html, body, p, label {
     color: $main-text-color;
     font-size: 16px;
-    background-color: #ffffff;
+    
 }
 .ago-form {
     color: $main-text-color;
@@ -51,5 +51,13 @@ html, body, p, label {
       letter-spacing: 1px;
     }
   }
+.btn-ago {
+  background-color: #5600FF !important;
+  border-color: #5600FF !important;
+  color: white !important;
+}
 
+.btn-ago:hover {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.18) !important;
+}
   

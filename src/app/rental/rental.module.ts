@@ -12,6 +12,9 @@ import { RentalListItemComponent } from './rental-list-item/rental-list-item.com
 import { RentalComponent } from './rental.component';
 
 import { RentalService } from './shared/rental.service';
+import {HelperService} from '../common/service/helper.service';
+import {BookingService} from '../booking/shared/booking.service';
+
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentalCreateComponent } from './rental-create/rental-create.component';
 import { RentalDetailBookingComponent } from './rental-detail/rental-detail-booking/rental-detail-booking.component';
@@ -46,6 +49,10 @@ const routes: Routes = [
         MapModule,
         Daterangepicker
     ],
-    providers: [RentalService]
+    providers: [
+        RentalService, 
+        HelperService,
+        BookingService
+    ]
 })
 export class RentalModule{}

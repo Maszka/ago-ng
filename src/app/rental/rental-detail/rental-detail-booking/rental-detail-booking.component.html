@@ -1,14 +1,38 @@
 <div class="booking">
-  <h3 class="booking-price">{{price}} PLN <span class="booking-per-night"> za dzień</span></h3>
+  <h3 class="booking-price">{{rental.price}} PLN <span class="booking-per-night"> za dzień</span></h3>
   <hr>
   <label>Daty</label>
     <input type="text" class="form-control daterangepicker-input" name="daterangeInput" daterangepicker [options]="options" (selected)="selectedDate($event, daterange)"
      />
   <div class="form-group"></div>
-  <button class="btn btn-danger btn-confirm btn-block">Zarezerwuj</button>
+  <button (click)="openConfirmModal(content)" class="btn btn-danger btn-confirm btn-block btn-ago">Zarezerwuj</button>
   <hr>
   <p class="booking-note-title">Użytkownicy często rezerwują ten przedmiot</p>
   <p class="booking-note-text">
     Ponad 10 osób zarezerwowało ten przedmiot w ciągu ostatnich 3 miesięcy
   </p>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Potwierdź rezerwację <p>{{newBooking.startAt}} - {{newBooking.endAt}}</p></h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <em>Ilość dni: {{newBooking.days}}</em><br>
+    <em>Cena za dzień: {{rental.price}} zł</em>
+    <p>Cena całkowita: <em>{{newBooking.totalPrice}} zł</em></p>
+    <p>Czy chcesz potwierdzić rezerwację?</p>
+  </div>
+  <div *ngIf="errors.length > 0" class="alert alert-danger modal-error">
+    <p *ngFor="let error of errors">
+      {{error.detail}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ago" (click)="createBooking()">Potwierdź</button>
+    <button type="button" class="btn btn-ago" (click)="c('Save click')">Anuluj</button>
+  </div>
+</ng-template>

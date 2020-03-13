@@ -18,10 +18,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
   mapReadyHandler() {
-    debugger;
     this.mapService.geocodeLocation(this.location).subscribe(
       (coordinates) => {
-        debugger;
         this.lat = coordinates.lat;
         this.lng = coordinates.lng;
       });

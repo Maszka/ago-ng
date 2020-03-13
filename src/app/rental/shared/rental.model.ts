@@ -1,3 +1,5 @@
+import {Booking } from '../../booking/shared/booking.model'
+
 export class Rental {
 
     static readonly CATEGORIES = ['Sprzęt muzyczny', 'Dla dzieci', 'Majsterkowanie', 'Sprzątanie', 'Fotografia', 'Inne'];
@@ -11,4 +13,5 @@ export class Rental {
     description: string;
     price: number;
     createdAt: string;
+    bookings: Booking[];
 }

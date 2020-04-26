@@ -20,6 +20,55 @@ router.get('', function(req, res){
    });
 });
 
+router.get('/manage', UserCtrl.authMiddleware, function(req, res){
+    const user = res.locals.user;
+
+    Rental.where({user})
+            .populate('bookings')
+            .exec(function(err, foundRentals) {
+                if(err){
+                    return res.status(422).send({errors: normalizeErrors(err.errors)});
+                }
+
+                return res.json(foundRentals)
+            });
+}); 
+
+router.delete('/:id', UserCtrl.authMiddleware, function(req, res){
+    const user = res.locals.user;
+
+    Rental.findById(req.params.id)
+            .populate('user', '_id')
+            .populate({
+                path: 'bookings',
+                select: 'startAt',
+                match: { startAt: {$gt: new Date()}}
+            })
+            .exec(function(err, foundRental) {
+
+                if(err) {
+                    return res.status(422).send({errors: normalizeErrors(err.errors)});
+                }
+
+                //if(user.id !== foundRental.user.id) {
+                   // return res.status(422).send({errors: [{title: 'Ivalid user', detail: 'You are not rental owner'}]});
+                //}
+
+                if(foundRental.bookings.lengh > 0) {
+                    return res.status(422).send({errors: [{title: 'Active booking', detail: 'Cannot delete rental with active booking'}]});
+                }
+
+                foundRental.remove(function(err){
+                    if(err) {
+                        return res.status(422).send({errors: normalizeErrors(err.errors)});
+                    }
+
+                    return res.json({'status': 'deleted'});
+                });
+            });
+        });
+
+
 router.post('', UserCtrl.authMiddleware, function(req, res){
     const {title, city, street, category, image, description, price} = req.body;
     const user = res.locals.user;

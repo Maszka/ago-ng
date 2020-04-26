@@ -18,7 +18,7 @@ exports.auth = function(req, res) {
         } 
 
         if(!user){
-            return res.status(422).send({errors: [{title: 'Invalid email or user', detail: 'User does not exists'}]}); 
+            return res.status(422).send({errors: [{title: 'Invalid email or user', detail: 'User does not exist'}]}); 
         }
 
         if(user.hasSamePassword(password)){

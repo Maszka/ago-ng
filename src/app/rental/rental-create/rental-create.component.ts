@@ -1,7 +1,9 @@
-import { RentalService } from './../shared/rental.service';
 import { Component, OnInit } from '@angular/core';
-import {Rental} from '../shared/rental.model';
+import { Rental } from '../shared/rental.model';
+import { RentalService } from '../shared/rental.service';
 
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'ago-rental-create',
@@ -12,11 +14,13 @@ export class RentalCreateComponent implements OnInit {
 
   newRental: Rental;
   rentalCategories = Rental.CATEGORIES;
+  errors: any[] = [];
 
-  constructor(private rentalService: RentalService) { }
+  constructor(private rentalService: RentalService,
+              private router: Router) { }
 
   handleImageChange() {
-    this.newRental.image = "https://upload.wikimedia.org/wikipedia/commons/0/01/Gibson_Les_Paul_54_Custom.jpg";
+    this.newRental.image = "https://api.adorable.io/avatars/285/abott@adorable.png";
   }
 
   ngOnInit() {
@@ -25,11 +29,11 @@ export class RentalCreateComponent implements OnInit {
 
   createRental() {
     this.rentalService.createRental(this.newRental).subscribe(
-      () => {
-
+      (rental: Rental) => {
+        this.router.navigate([`/rentals/${rental._id}`]);
       },
-      () => {
-
+      (errorResponse: HttpErrorResponse) => {
+        this.errors = errorResponse.error.errors;
       })
   }
 

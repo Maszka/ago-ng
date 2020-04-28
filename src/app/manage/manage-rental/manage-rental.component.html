@@ -1,3 +1,38 @@
-<p *ngFor="let rental of rentals">
-  {{rental.city}}
-</p>
+<section id="userRentals">
+  <h1 class="page-title">Moje przedmioty</h1>
+  <div class="row">
+    <ng-container *ngIf="rentals && rentals.length > 0">
+      <div *ngFor="let rental of rentals; let i = index" class="col-md-4">
+        <div class="card text-center">
+          <div class="card-block">
+            <h4 class="card-title">{{rental.title}} - {{rental.city | ucwords}}</h4>
+            <a class="btn btn-ghost" routerLink="/rentals/{{rental._id}}">Idź do przedmiotu</a>
+            <span *ngIf="rental.bookings.length > 0">
+              <ago-manage-rental-booking [bookings]="rental.bookings"> </ago-manage-rental-booking>
+            </span>
+          </div>
+          <div class="card-footer text-muted">
+             <p>Przedmiot stworzony {{rental.createdAt | formatDate}}</p>
+             <button (click)="rentalDeleteIndex = i"
+                      *ngIf="rentalDeleteIndex !== i"
+                      type="button"
+                      class="btn btn-ago btn-delete">Usuń</button>
+              <div *ngIf="rentalDeleteIndex === i">
+                <p class="confirm-message">Czy na pewno chcesz usunąć ten przedmiot?</p>
+                <button (click)="deleteRental(rental._id)"
+                         class="btn btn-success">Tak</button>
+                <button (click)="rentalDeleteIndex = undefined"
+                         class="btn btn-danger">Nie</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div *ngIf="rentals && rentals.length === 0" class="col-md-8">
+      <div class="alert alert-warning">
+        Nie masz obecnie żadnych przedmiotów
+        <a class="btn btn-ago" routerLink="/rentals/new">Dodaj przedmiot</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -50,19 +50,18 @@ router.delete('/:id', UserCtrl.authMiddleware, function(req, res){
                     return res.status(422).send({errors: normalizeErrors(err.errors)});
                 }
 
-                //if(user.id !== foundRental.user.id) {
-                   // return res.status(422).send({errors: [{title: 'Ivalid user', detail: 'You are not rental owner'}]});
-                //}
+                if(user.id !== foundRental.user.id) {
+                    return res.status(422).send({errors: [{title: 'Ivalid user', detail: 'You are not item owner'}]});
+                }
 
-                if(foundRental.bookings.lengh > 0) {
-                    return res.status(422).send({errors: [{title: 'Active booking', detail: 'Cannot delete rental with active booking'}]});
+                if(foundRental.bookings.length > 0) {
+                    return res.status(422).send({errors: [{title: 'Active booking', detail: 'Cannot delete item with active booking'}]});
                 }
 
                 foundRental.remove(function(err){
                     if(err) {
                         return res.status(422).send({errors: normalizeErrors(err.errors)});
                     }
-
                     return res.json({'status': 'deleted'});
                 });
             });
@@ -74,6 +73,7 @@ router.post('', UserCtrl.authMiddleware, function(req, res){
     const user = res.locals.user;
 
     const rental = new Rental({title, city, street, category, image, description, price});
+    rental.user = user;
 
     Rental.create(rental, function(err, newRental) {
         if(err){
@@ -82,8 +82,6 @@ router.post('', UserCtrl.authMiddleware, function(req, res){
     User.update({_id: user.id}, { $push: {rentals: newRental}}, function(){});
     return res.json(newRental);
     })
-    
-    
 })
 
 router.get('/:id', function(req, res){
@@ -96,7 +94,6 @@ router.get('/:id', function(req, res){
         if(err){
             res.status(422).send({errors: [{title: 'Rental Error', detail: 'Rental not found'}]});
         }
-
         res.json(foundRental);
     });
 });

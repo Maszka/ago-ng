@@ -15,9 +15,19 @@
               <a *ngIf="!auth.isAuthenticated()" class="nav-item nav-link" routerLink="/register">Rejestracja</a>
             </div>
       </ng-container> 
-    <ng-container *ngIf="auth.isAuthenticated()">     
+    <ng-container *ngIf="auth.isAuthenticated()"> 
       <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link">{{auth.getUsername()}}</a>
+        <div class="nav-item dropdown clickable">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Zarządzaj kontem
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="/rentals/new">Stwórz przedmiot</a>
+            <a class="dropdown-item" routerLink="/manage/rentals">Zarządzaj przedmiotami</a>
+            <a class="dropdown-item" routerLink="/manage/bookings">Zarządzaj rezerwacjami</a>
+          </div>
+        </div>    
+        <a class="nav-item nav-link">{{auth.getUsername()}}</a>
         <a class="nav-item nav-link" (click)="logout()">Wyloguj</a>
       </div>
     </ng-container> 

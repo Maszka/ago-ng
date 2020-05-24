@@ -1,10 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" routerLink="/rentals">Wypożycz.to</a>
-    <form class="form-inline">
-        <input class="form-control mr-sm-2 ago-search" type="search" placeholder="Szukaj" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0 btn-ago-search" type="submit">Szukaj
-    </button>
-      </form>
+    <div class="form-inline">
+      <input #citySearch
+            (keyup.enter)="search(citySearch.value)"
+            class="form-control mr-sm-2 bwm-search"
+            type="search"
+            placeholder="Wpisz miasto..."
+            aria-label="Search">
+        <button (click)="search(citySearch.value)"
+                class="btn btn-outline-success my-2 my-sm-0 btn-ago-search"
+                type="button">Szukaj</button>
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -11,14 +11,7 @@ router.get('/secret', UserCtrl.authMiddleware, function(req, res){
 });
 
 
-router.get('', function(req, res){
-   Rental.find({})
-        .select('-bookings')
-        .exec(function(err, foundRentals){
-    
-    res.json(foundRentals);
-   });
-});
+
 
 router.get('/manage', UserCtrl.authMiddleware, function(req, res){
     const user = res.locals.user;
@@ -33,6 +26,22 @@ router.get('/manage', UserCtrl.authMiddleware, function(req, res){
                 return res.json(foundRentals)
             });
 }); 
+
+router.get('/:id', function(req, res) {
+    const rentalId = req.params.id;
+  
+    Rental.findById(rentalId)
+          .populate('user', 'username -_id')
+          .populate('bookings', 'startAt endAt rental user -_id')
+          .exec(function(err, foundRental) {
+  
+      if (err || !foundRental) {
+        return res.status(422).send({errors: [{title: 'Rental Error!', detail: 'Could not find Rental!'}]});
+      }
+  
+      return res.json(foundRental);
+    });
+  });
 
 router.delete('/:id', UserCtrl.authMiddleware, function(req, res){
     const user = res.locals.user;
@@ -84,18 +93,24 @@ router.post('', UserCtrl.authMiddleware, function(req, res){
     })
 })
 
-router.get('/:id', function(req, res){
-    const rentalId = req.params.id;
-
-    Rental.findById(rentalId)
-        .populate('user', 'username -_id')
-        .populate('bookings', 'startAt endAt -_id')
-        .exec(function(err, foundRental) {
-        if(err){
-            res.status(422).send({errors: [{title: 'Rental Error', detail: 'Rental not found'}]});
-        }
-        res.json(foundRental);
+router.get('', function(req, res) {
+    const city = req.query.city;
+    const query = city ? {city: city.toLowerCase()} : {};
+  
+    Rental.find(query)
+        .select('-bookings')
+        .exec(function(err, foundRentals) {
+  
+      if (err) {
+        return res.status(422).send({errors: normalizeErrors(err.errors)});
+      }
+  
+      if (city && foundRentals.length === 0) {
+        return res.status(422).send({errors: [{title: 'No Rentals Found!', detail: `Nie znaleziono przedmiotów dla miasta ${city}`}]});
+      }
+  
+      return res.json(foundRentals);
     });
-});
+  });
 
 module.exports = router;

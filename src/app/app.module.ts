@@ -14,6 +14,7 @@ import {AuthModule} from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import {ManageModule} from './manage/manage.module';
 
+
 const routes: Routes = [
   {path: '', redirectTo: '/rentals', pathMatch: 'full' }
 ]

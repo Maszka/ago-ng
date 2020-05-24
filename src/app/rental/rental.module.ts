@@ -5,7 +5,9 @@ import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MapModule} from '../common/map/map.module';
-import {Daterangepicker} from 'ng2-daterangepicker'
+import {Daterangepicker} from 'ng2-daterangepicker';
+import {ImageUploadModule} from '../common/components/image-upload/image-upload.module';
+import {NgPipesModule} from 'ngx-pipes';
 
 import { RentalListComponent } from './rental-list/rental-list.component';
 import { RentalListItemComponent } from './rental-list-item/rental-list-item.component';
@@ -18,6 +20,7 @@ import {BookingService} from '../booking/shared/booking.service';
 import { RentalDetailComponent } from './rental-detail/rental-detail.component';
 import { RentalCreateComponent } from './rental-create/rental-create.component';
 import { RentalDetailBookingComponent } from './rental-detail/rental-detail-booking/rental-detail-booking.component';
+import { RentalSearchComponent } from './rental-search/rental-search.component';
 
 
 const routes: Routes = [
@@ -26,7 +29,8 @@ const routes: Routes = [
     children: [
         {path: '', component: RentalListComponent},
         {path: 'new', component: RentalCreateComponent, canActivate: [AuthGuard]},
-        {path: ':rentalId', component: RentalDetailComponent, canActivate: [AuthGuard]}
+        {path: ':rentalId', component: RentalDetailComponent, canActivate: [AuthGuard]},
+        {path: ':city/items', component: RentalSearchComponent}
     ]
   }]
 
@@ -38,7 +42,8 @@ const routes: Routes = [
         RentalComponent,
         RentalDetailComponent,
         RentalCreateComponent,
-        RentalDetailBookingComponent
+        RentalDetailBookingComponent,
+        RentalSearchComponent
     ],
     imports: [
         CommonModule,
@@ -47,7 +52,9 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         MapModule,
-        Daterangepicker
+        Daterangepicker,
+        ImageUploadModule,
+        NgPipesModule
     ],
     providers: [
         RentalService, 
